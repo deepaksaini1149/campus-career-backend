@@ -1,3 +1,4 @@
+
 package com.campuscareer.backend.controller;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,7 +10,10 @@ import com.campuscareer.backend.entity.User;
 import com.campuscareer.backend.repository.UserRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://campus-career-frontend.onrender.com"
+})
 public class UserController {
 
     private final UserRepository userRepository;
