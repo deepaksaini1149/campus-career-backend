@@ -21,7 +21,10 @@ import com.campuscareer.backend.repository.ApplicationRepository;
 
 @RestController
 @RequestMapping("/api/applications")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://campus-career-frontend.onrender.com"
+})
 public class ApplicationController {
 
     private final ApplicationRepository applicationRepository;
