@@ -1,4 +1,3 @@
-
 package com.campuscareer.backend.controller;
 
 import java.util.List;
@@ -21,7 +20,10 @@ import com.campuscareer.backend.repository.OpportunityRepository;
 
 @RestController
 @RequestMapping("/api/opportunities")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://campus-career-frontend.onrender.com"
+})
 public class OpportunityController {
 
     private final OpportunityRepository opportunityRepository;
@@ -31,7 +33,6 @@ public class OpportunityController {
         this.opportunityRepository = opportunityRepository;
     }
 
-    // CREATE: Add a new opportunity
     @PostMapping
     public Opportunity addOpportunity(
             @RequestBody Opportunity opportunity) {
@@ -39,13 +40,11 @@ public class OpportunityController {
         return opportunityRepository.save(opportunity);
     }
 
-    // READ: Get all opportunities
     @GetMapping
     public List<Opportunity> getAllOpportunities() {
         return opportunityRepository.findAll();
     }
 
-    // READ: Get an opportunity by ID
     @GetMapping("/{id}")
     public Opportunity getOpportunityById(@PathVariable Long id) {
         return opportunityRepository.findById(id)
@@ -54,13 +53,11 @@ public class OpportunityController {
                         "Opportunity not found"));
     }
 
-    // READ: Get opportunities by type
     @GetMapping("/type/{type}")
     public List<Opportunity> getByType(@PathVariable String type) {
         return opportunityRepository.findByType(type);
     }
 
-    // UPDATE: Update an existing opportunity
     @PutMapping("/{id}")
     public Opportunity updateOpportunity(
             @PathVariable Long id,
@@ -84,7 +81,6 @@ public class OpportunityController {
         return opportunityRepository.save(existing);
     }
 
-    // DELETE: Delete an opportunity
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOpportunity(@PathVariable Long id) {
